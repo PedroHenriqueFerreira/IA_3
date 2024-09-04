@@ -25,8 +25,8 @@ i_scaler, i_X_train, i_X_test, i_y_train, i_y_test = preprocess_database(iris)
 
 # Training Regressions
 
-# linear_regression.fit(c_X_train, c_y_train, lr=0.0001, epochs=200, verbose=True)
-# neural_regression.fit(c_X_train, c_y_train, lr=0.0001, epochs=200, verbose=True)
+linear_regression.fit(c_X_train, c_y_train, lr=0.0001, epochs=200, verbose=True)
+neural_regression.fit(c_X_train, c_y_train, lr=0.0001, epochs=200, verbose=True)
 
 # Training Classifiers
 
@@ -37,8 +37,8 @@ neural_classifier.fit(i_X_train, i_y_train, lr=0.01, epochs=10000, verbose=True)
 
 print()
 
-# print(f'LINEAR REGRESSION SCORE: {linear_regression.score(c_X_test, c_y_test)}')
-# print(f'NEURAL REGRESSION SCORE: {neural_regression.score(c_X_test, c_y_test)}')
+print(f'LINEAR REGRESSION SCORE: {linear_regression.score(c_X_test, c_y_test)}')
+print(f'NEURAL REGRESSION SCORE: {neural_regression.score(c_X_test, c_y_test)}')
 
 print()
 
