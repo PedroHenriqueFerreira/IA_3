@@ -6,9 +6,11 @@ from optimizers import Adam, SGD
 from neural_network import NeuralNetwork
 from layers import Linear, ReLU, Sigmoid, SoftMax
 
+from utils import timer
+
 class Model:
     ''' Classe base para os modelos '''
-    
+
     def fit(self, X: np.ndarray, y: np.ndarray, **kwargs):
         ''' Treina o modelo '''
         
@@ -45,7 +47,8 @@ class NeuralNetworkRegression(Regression):
     
     def __init__(self):
         self.neural_network: NeuralNetwork | None = None
-        
+    
+    @timer    
     def fit(self, X: np.ndarray, y: np.ndarray, **kwargs):
         in_features = X.shape[1]
         out_features = y.shape[1]
@@ -75,6 +78,7 @@ class NeuralNetworkClassifier(Classifier):
     def __init__(self):
         self.neural_network: NeuralNetwork | None = None
         
+    @timer
     def fit(self, X: np.ndarray, y: np.ndarray, **kwargs):
         in_features = X.shape[1]
         out_features = len(np.unique(y))
@@ -107,6 +111,7 @@ class LinearRegression(Regression):
     def __init__(self):
         self.neural_network: NeuralNetwork | None = None
     
+    @timer
     def fit(self, X: np.ndarray, y: np.ndarray, **kwargs):
         in_features = X.shape[1]
         out_features = y.shape[1]
@@ -130,6 +135,7 @@ class LogisticRegression(Classifier):
     def __init__(self):
         self.neural_networks: dict[int, NeuralNetwork] = {}
     
+    @timer
     def fit(self, X: np.ndarray, y: np.ndarray, **kwargs):
         in_features = X.shape[1]
         

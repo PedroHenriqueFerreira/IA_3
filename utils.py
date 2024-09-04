@@ -3,6 +3,8 @@ import numpy as np
 
 from scalers import StandardScaler
 
+from time import time
+
 def train_test_split(
     X: np.ndarray, 
     y: np.ndarray, 
@@ -34,3 +36,15 @@ def preprocess_database(database: Any):
     X_test = scaler.transform(X_test)
     
     return scaler, X_train, X_test, y_train, y_test
+
+def timer(func: callable):
+    ''' Calcula o tempo de execução de uma função '''
+    
+    def inner(*args, **kwargs):
+        start = time()
+        func(*args, **kwargs)
+        end = time()
+        
+        return end - start
+    
+    return inner

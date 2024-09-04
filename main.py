@@ -10,7 +10,7 @@ from models import (
     NeuralNetworkClassifier
 )
 
-from utils import preprocess_database
+from utils import preprocess_database, timer
 
 linear_regression = LinearRegression()
 neural_regression = NeuralNetworkRegression()
@@ -25,22 +25,41 @@ i_scaler, i_X_train, i_X_test, i_y_train, i_y_test = preprocess_database(iris)
 
 # Training Regressions
 
-linear_regression.fit(c_X_train, c_y_train, lr=0.0001, epochs=200, verbose=True)
-neural_regression.fit(c_X_train, c_y_train, lr=0.0001, epochs=200, verbose=True)
+linear_regression_time = linear_regression.fit(
+    c_X_train, c_y_train, lr=0.0001, epochs=200, verbose=True
+)
+
+linear_regression_score = linear_regression.score(c_X_test, c_y_test)
+
+neural_regression_time = neural_regression.fit(
+    c_X_train, c_y_train, lr=0.0001, epochs=200, verbose=True
+)
+
+neural_regression_score = neural_regression.score(c_X_test, c_y_test)
 
 # Training Classifiers
 
-logistic_regression.fit(i_X_train, i_y_train, lr=0.01, epochs=10000, verbose=True)
-neural_classifier.fit(i_X_train, i_y_train, lr=0.01, epochs=10000, verbose=True)
+logistic_regression_time = logistic_regression.fit(
+    i_X_train, i_y_train, lr=0.01, epochs=10000, verbose=True
+)
+
+logistic_regression_score = logistic_regression.score(i_X_test, i_y_test)
+
+neural_classifier_time = neural_classifier.fit(
+    i_X_train, i_y_train, lr=0.01, epochs=10000, verbose=True
+)
+
+neural_classifier_score = neural_classifier.score(i_X_test, i_y_test)
 
 # Scores
 
 print()
 
-print(f'LINEAR REGRESSION SCORE: {linear_regression.score(c_X_test, c_y_test)}')
-print(f'NEURAL REGRESSION SCORE: {neural_regression.score(c_X_test, c_y_test)}')
+print(f'LINEAR REGRESSION SCORE: {linear_regression_score} | TIME: {linear_regression_time}')
+
+print(f'NEURAL REGRESSION SCORE: {neural_regression_score} | TIME: {neural_regression_time}')
 
 print()
 
-print(f'LOGISTIC REGRESSION SCORE: {logistic_regression.score(i_X_test, i_y_test)}')
-print(f'NEURAL CLASSIFIER SCORE: {neural_classifier.score(i_X_test, i_y_test)}')
+print(f'LOGISTIC REGRESSION SCORE: {logistic_regression_score} | TIME: {logistic_regression_time}')
+print(f'NEURAL CLASSIFIER SCORE: {neural_classifier_score} | TIME: {neural_classifier_time}')
