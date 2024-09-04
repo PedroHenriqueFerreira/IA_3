@@ -67,6 +67,9 @@ class NeuralNetwork:
         min_loss = float('inf') # Menor perda
         
         batchs = len(X) // batch_size
+      
+        if verbose:
+            print()
         
         for i in range(epochs):
             loss = 0

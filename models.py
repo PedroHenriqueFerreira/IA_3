@@ -87,11 +87,11 @@ class NeuralNetworkClassifier(Classifier):
             BCE(), 
             Adam(**kwargs),
             [
-                Linear(in_features, 12),
+                Linear(in_features, 100),
                 ReLU(),
-                Linear(12, 6),
+                Linear(100, 100),
                 ReLU(),
-                Linear(6, out_features),
+                Linear(100, out_features),
                 SoftMax()
             ]
         )

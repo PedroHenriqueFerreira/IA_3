@@ -40,11 +40,10 @@ def preprocess_database(database: Any):
 def timer(func: callable):
     ''' Calcula o tempo de execução de uma função '''
     
-    def inner(*args, **kwargs):
+    def sub(*args, **kwargs):
         start = time()
         func(*args, **kwargs)
-        end = time()
         
-        return end - start
+        return time() - start
     
-    return inner
+    return sub
