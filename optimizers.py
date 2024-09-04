@@ -11,7 +11,7 @@ class Optimizer:
 class SGD(Optimizer):
     ''' Otimizador de descida de gradiente estocástica '''
     
-    def __init__(self, lr=0.01):
+    def __init__(self, lr=0.01, **kwargs):
         self.lr = lr # Taxa de aprendizado
 
     def __call__(self, params: list[np.ndarray], grads: list[np.ndarray]):
@@ -21,7 +21,7 @@ class SGD(Optimizer):
 class Momentum(Optimizer):
     ''' Otimizador de momento '''
     
-    def __init__(self, lr=0.01, momentum=0.9):
+    def __init__(self, lr=0.01, momentum=0.9, **kwargs):
         self.lr = lr # Taxa de aprendizado
         self.momentum = momentum # Momento
         self.m = None # Momento
@@ -38,7 +38,7 @@ class Momentum(Optimizer):
 class Adam(Optimizer):
     ''' Otimizador Adam '''
     
-    def __init__(self, lr=0.01, beta1=0.9, beta2=0.999):
+    def __init__(self, lr=0.01, beta1=0.9, beta2=0.999, **kwargs):
         self.lr = lr # Taxa de aprendizado
         self.beta1 = beta1 # Fator de decaimento do primeiro momento
         self.beta2 = beta2 # Fator de decaimento do segundo momento

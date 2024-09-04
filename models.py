@@ -49,15 +49,18 @@ class NeuralNetworkRegression(Regression):
     def fit(self, X: np.ndarray, y: np.ndarray, **kwargs):
         in_features = X.shape[1]
         out_features = y.shape[1]
-        hidden_features = (in_features + out_features) // 2
         
         self.neural_network = NeuralNetwork(
             MSE(), 
-            Adam(), 
+            Adam(**kwargs),
             [
-                Linear(in_features, hidden_features),
+                Linear(in_features, 24),
                 ReLU(),
-                Linear(hidden_features, out_features)
+                Linear(24, 12),
+                ReLU(),
+                Linear(12, 6),
+                ReLU(),
+                Linear(6, out_features)
             ]
         )
         
@@ -75,15 +78,16 @@ class NeuralNetworkClassifier(Classifier):
     def fit(self, X: np.ndarray, y: np.ndarray, **kwargs):
         in_features = X.shape[1]
         out_features = len(np.unique(y))
-        hidden_features = (in_features + out_features) // 2
         
         self.neural_network = NeuralNetwork(
             BCE(), 
-            Adam(), 
+            Adam(**kwargs),
             [
-                Linear(in_features, hidden_features),
+                Linear(in_features, 12),
                 ReLU(),
-                Linear(hidden_features, out_features),
+                Linear(12, 6),
+                ReLU(),
+                Linear(6, out_features),
                 SoftMax()
             ]
         )
@@ -109,7 +113,7 @@ class LinearRegression(Regression):
         
         self.neural_network = NeuralNetwork(
             MSE(), 
-            SGD(lr=0.0001), 
+            SGD(**kwargs),
             [
                 Linear(in_features, out_features)
             ]
@@ -132,7 +136,7 @@ class LogisticRegression(Classifier):
         for classification in np.unique(y):
             self.neural_networks[classification] = NeuralNetwork(
                 BCE(), 
-                SGD(), 
+                SGD(**kwargs),
                 [
                     Linear(in_features, 1),
                     Sigmoid()

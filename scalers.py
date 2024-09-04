@@ -24,7 +24,7 @@ class Scaler:
         
         raise NotImplementedError()
 
-class Standard(Scaler):
+class StandardScaler(Scaler):
     ''' Escalador normal padrão '''
     
     def __init__(self):
@@ -41,7 +41,7 @@ class Standard(Scaler):
     def inverse_transform(self, X: np.ndarray):
         return X * self.std + self.mean
     
-class MinMax(Scaler):
+class MinMaxScaler(Scaler):
     ''' Escalador Min-Max '''
     
     def __init__(self):
