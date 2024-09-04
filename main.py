@@ -10,7 +10,7 @@ from models import (
     NeuralNetworkClassifier
 )
 
-from utils import preprocess_database, timer
+from utils import preprocess_database
 
 linear_regression = LinearRegression()
 neural_regression = NeuralNetworkRegression()
